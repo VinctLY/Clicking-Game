@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    </link>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <p id="message"></p>
+        <button id="button">Click me LOL!</button>
+        <div class="confirm-wrapper">
+            <button id="yes" class="hide confirmation">yes</button>
+            <button id="no" class="hide confirmation">no</button>
+        </div>
+    </div>
+
+    <script>
+        const wrapper = document.getElementById('wrapper')
+        const button = document.getElementById('button')
+
+        const lmao = ["You can't catch me lol", "What takes u so long to click me?", "Click me LOL!", "You suck!", "Too slow LMAO!", "Are you crying?", "You're not worthy my opponent"]
+
+        button.addEventListener('mouseenter', () => {
+            if (this) {
+                console.clear()
+
+                let randomHeight = Math.floor(Math.random() * (wrapper.offsetHeight - button.offsetHeight))
+                let randomWidth = Math.floor(Math.random() * (wrapper.offsetWidth - button.offsetWidth))
+
+                let randomWords = Math.floor(Math.random() * lmao.length)
+                button.textContent = lmao[randomWords]
+
+                // console.log(button.textContent)
+
+                button.style.top = randomHeight + "px"
+                button.style.left = randomWidth + "px"
+
+                console.log('wrapper height : ', wrapper.offsetHeight, 'button height : ', button.offsetHeight)
+                console.log('wrapper width : ', wrapper.offsetWidth, 'button width : ', button.offsetWidth)
+
+                console.log('random height : ', randomHeight, 'random width : ', randomWidth)
+                console.log('============ break ============')
+            }
+        })
+
+        button.addEventListener('click', () => {
+            if (this) {
+                button.classList.toggle('hide')
+
+                const textMessage = document.getElementById('message')
+                const short = 1000 // 1-3 words
+                const medium = 2500 // 4-10 words
+                const long = 3500 // 11++ words
+
+                function message(msg, time) {
+                    return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            resolve(msg)
+                        }, time);
+                    })
+                }
+
+                async function gameStart() {
+                    try {
+                        textMessage.textContent = await message('How dare you click on me?!', short)
+                        textMessage.textContent = await message("I want to kill you now 😡", medium)
+                        textMessage.textContent = await message("Wait but I don't even existed :(", medium)
+                        textMessage.textContent = await message("But I still hate you, and btw", medium)
+                        textMessage.textContent = await message("Do you want to play again? But it's harder now hahaha.. You'll have no chance against me. Just click the button below!", long)
+                    }
+
+                    finally {
+                        textMessage.textContent = await message("Do you wish to play?", long)
+                        const confirmation = document.querySelectorAll('.confirmation')
+                        const yes = document.getElementById('yes')
+                        const no = document.getElementById('no')
+
+                        confirmation.forEach(check);
+
+                        function check(item) {
+                            item.classList.remove('hide')
+                        }
+
+                        yes.addEventListener('click', () => {
+                            async function impossible() {
+                                textMessage.style.color = '#e23737'
+                                textMessage.textContent = await message("This is the impossible")
+                                textMessage.textContent = await message("Let's see how you can finish this game", medium)
+                                textMessage.textContent = await message("And I'll praise you for compeleting my impossible game", short)
+                            }
+
+                            impossible()
+
+                            no.remove()
+                            yes.remove()
+
+                            button.classList.toggle('hide')
+                            setInterval(() => {
+                                let randomHeight = Math.floor(Math.random() * (wrapper.offsetHeight - button.offsetHeight))
+                                let randomWidth = Math.floor(Math.random() * (wrapper.offsetWidth - button.offsetWidth))
+
+                                let randomWords = Math.floor(Math.random() * lmao.length)
+                                button.textContent = lmao[randomWords]
+
+                                button.style.top = randomHeight + "px"
+                                button.style.left = randomWidth + "px"
+                            }, 100)
+
+                            button.addEventListener('click', () => {
+                                if (this) {
+                                    async function how() {
+                                        textMessage.textContent += await message(".", short)
+                                        textMessage.textContent += await message(".", short)
+                                        textMessage.textContent += await message(".", medium)
+                                        textMessage.textContent += await message("How did you even..", medium)
+                                        textMessage.textContent += await message("Alright I'll praise you for that, you now beat me..", medium)
+                                        textMessage.textContent += await message("But I'm sure you has to be cheating", long)
+                                        textMessage.textContent += await message("And you suck anyway, LMAO!", long)
+                                    }
+                                }
+                            })
+                        })
+
+                        no.addEventListener('click', () => {
+                            yes.remove()
+                            no.remove()
+                            textMessage.textContent = "Alright, good bye, crackhead!"
+                        })
+                    }
+                }
+
+                gameStart()
+            }
+        })
+    </script>
+</body>
+
+</html>
