@@ -98,7 +98,7 @@ button.addEventListener('click', () => {
                 textMessage.textContent = await message("I want to kill you now 😡", short)
                 textMessage.textContent = await message("Do you want to play again? But it's harder now hahaha.. You'll have no chance against me. Just click the button below!", short)
             } finally {
-                textMessage.textContent = await message("Do you wish to play?")
+                textMessage.textContent = await message("Do you wish to play?", long)
                 const confirmation = document.querySelectorAll('.confirmation')
                 const yes = document.getElementById('yes')
                 const no = document.getElementById('no')
