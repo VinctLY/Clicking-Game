@@ -165,7 +165,6 @@ button.addEventListener('click', () => {
 cheat.addEventListener('click', () => {
     let guide = true
     if (this) {
-        document.getElementsByClassName('cheat-follow')[0].classList.remove('hide')
         async function instruction() {
             cheat.disabled = true
             const cheatInstruct = document.getElementById('cheating')
@@ -178,6 +177,7 @@ cheat.addEventListener('click', () => {
 
             // Instructing the cheat
 
+            document.getElementsByClassName('cheat-follow')[0].classList.remove('hide')
             cheatInstruct.textContent = await message('Ok so you would have to click wherever it is')
             cheatInstruct.textContent = await message('Not the button, okay!', short)
 
